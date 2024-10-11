@@ -11,18 +11,18 @@ const TaskCreator: React.FC = () => {
         return id;
     }
 
-    let task = { 
+    let task = {
         "eventid": 'sample-event-id', // Placeholder for the eventId (Will be set in the call directly)
         "title": "Deploying Cloud backend for Task Scheduler application",
         "description": "Need to create a backend (Likely in GCP) in order to support task creation, storage and retrieval.", 
         "starttimestamp": "Fri, 11 Oct 2024 11:32:00 GMT", 
         "endtimestamp": "Fri, 11 Oct 2024 14:24:00 GMT", 
-        "status": "To be done", 
+        "status": "To be done",
     };
     const sendTasksToServer = async () => {
         try {
             task.eventid = getRandomId();
-            const response = await axios.post('http://192.168.43.62:5000/create_task', task, {
+            const response = await axios.post('http://192.168.43.62:5000/create_event', task, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
