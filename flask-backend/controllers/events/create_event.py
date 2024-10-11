@@ -13,12 +13,12 @@ def init_connection_pool() -> sqlalchemy.engine.base.Engine:
     return connect_tcp_socket()
 
 
-def create_event():
+def create_event(event):
     db = init_connection_pool()
     with db.connect() as conn:
         conn.execute(
             sqlalchemy.text(
-                f"INSERT INTO events (eventId, title, description, status, startTimestamp, endTimestamp) VALUES ('event.id.000', 'Test event', 'Sample description for my event', 'To be done', '2024-10-07 19:00:00', '2024-10-07 20:00:00');"
+                f"INSERT INTO events (eventId, title, description, status, startTimestamp, endTimestamp) VALUES ('{event['eventid']}', '{event['title']}', '{event['description']}', '{event['status']}', '{event['starttimestamp']}', '{event['endtimestamp']}');"
             )
         )
         conn.commit()

@@ -14,10 +14,10 @@ def get_events_route():
     events_list = retrieve_events()
     return jsonify(events_list)
 
-# TODO: Make it a POST
-@app.route('/create_event', methods=['GET'])
+@app.route('/create_event', methods=['POST'])
 def create_event_route():
-    create_event()
+    event = request.json
+    create_event(event)
     return jsonify({'message': 'Event creation request received'}), 200
 
 @app.route('/ping', methods=['GET'])

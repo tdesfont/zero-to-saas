@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
 
-const TaskCreator: React.FC = () => {
+const EventCreator: React.FC = () => {
 
     const getRandomId = () => { 
         /* Generate a random resource id for the event as the id is a primary key and should be unique.
@@ -11,25 +11,28 @@ const TaskCreator: React.FC = () => {
         return id;
     }
 
-    let task = {
+
+    let event = {
         "eventid": 'sample-event-id', // Placeholder for the eventId (Will be set in the call directly)
         "title": "Deploying Cloud backend for Task Scheduler application",
         "description": "Need to create a backend (Likely in GCP) in order to support task creation, storage and retrieval.", 
-        "starttimestamp": "Fri, 11 Oct 2024 11:32:00 GMT", 
+        "starttimestamp": "Fri, 11 Oct 2024 13:24:00 GMT", 
         "endtimestamp": "Fri, 11 Oct 2024 14:24:00 GMT", 
         "status": "To be done",
     };
-    const sendTasksToServer = async () => {
+    const sendEventToServer = async () => {
         try {
-            task.eventid = getRandomId();
-            const response = await axios.post('http://192.168.43.62:5000/create_event', task, {
+            event.eventid = getRandomId();
+            event.starttimestamp = new Date().toISOString();
+            event.endtimestamp = new Date().toISOString();
+            const response = await axios.post('http://192.168.43.62:5000/create_event', event, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log('Tasks sent successfully:', response.data);
+            console.log('Event sent successfully:', response.data);
         } catch (error) {
-            console.error('Error sending tasks:', error);
+            console.error('Error sending events:', error);
         }
     };
 
@@ -38,7 +41,7 @@ const TaskCreator: React.FC = () => {
         <View style={styles.container}>
             <View style={styles.tilesContainer}>
                 <TouchableOpacity
-                    onPress={() => sendTasksToServer()}
+                    onPress={() => sendEventToServer()}
                 >
                     <Text style={styles.tileText}>Create new event</Text>
                 </TouchableOpacity>
@@ -83,4 +86,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TaskCreator;
+export default EventCreator;

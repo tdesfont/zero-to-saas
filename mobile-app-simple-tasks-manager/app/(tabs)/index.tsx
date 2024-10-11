@@ -2,7 +2,7 @@ import { Image, StyleSheet } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
-import TaskCreator from '@/components/tasksScheduler/TaskCreator';
+import EventCreator from '@/components/EventCreator';
 
 export default function HomeScreen() {
   return (
@@ -15,7 +15,7 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <TaskCreator></TaskCreator>
+        <EventCreator />
       </ThemedView>      
      </ParallaxScrollView>
   );
