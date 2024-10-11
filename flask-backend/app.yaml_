@@ -1,0 +1,23 @@
+runtime: python39  # or your preferred Python version
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+
+handlers:
+- url: /frontend-build
+  static_dir: frontend-build/static
+- url: /(.*\.(json|ico|js))$
+  static_files: frontend-build/\1
+  upload: frontend-build/.*\.(json|ico|js)$
+- url: .*
+  script: auto
+
+env_variables:
+  INSTANCE_CONNECTION_NAME: ...
+  DB_USER: postgres
+  DB_PASS: ...
+  DB_NAME: postgres
+
+
+entrypoint: gunicorn -b :$PORT app:app

@@ -11,7 +11,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get('http://192.168.43.62:5000/events', {
+            const response = await axios.get('/api/events', {
                 headers: {
                     'Content-Type': 'application/json',
                 },
