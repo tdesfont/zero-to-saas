@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory
-from controllers.events.get_events import retrieve_events
-from controllers.events.create_event import create_event
+from controllers.events.get_events_wo_cloud_proxy import retrieve_events
+from controllers.events.create_event_wo_cloud_proxy import create_event
 import os
 
 app = Flask(__name__, static_folder='frontend-build', template_folder='frontend-build')
