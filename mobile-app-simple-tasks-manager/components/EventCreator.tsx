@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
+import TaskSchedulerForm from './TaskSchedulerForm';
 
 const EventCreator: React.FC = () => {
 
@@ -45,6 +46,7 @@ const EventCreator: React.FC = () => {
                 >
                     <Text style={styles.tileText}>Create new event</Text>
                 </TouchableOpacity>
+                <TaskSchedulerForm></TaskSchedulerForm>
             </View>
         </View>
     );

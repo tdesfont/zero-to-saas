@@ -32,4 +32,5 @@ def ping():
 
 
 if __name__ == '__main__':
-    app.run()
+    # Set host to '0.0.0.0' to get the external url (* Running on http://192.168.1.112:5000)
+    app.run(host='0.0.0.0', port=5000)
