@@ -1,9 +1,14 @@
 from flask import Flask, request, jsonify, send_from_directory
 from controllers.events.get_events_wo_cloud_proxy import retrieve_events
 from controllers.events.create_event_wo_cloud_proxy import create_event
+from controllers.events.delete_event import delete_event
+from flask_cors import CORS
+
 import os
 
 app = Flask(__name__, static_folder='frontend-build', template_folder='frontend-build')
+CORS(app)
+
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -25,6 +30,12 @@ def create_event_route():
     event = request.json
     create_event(event)
     return jsonify({'message': 'Event creation request received'}), 200
+
+@app.route('/api/delete_event', methods=['POST'])
+def delete_event_route():
+    event = request.json
+    delete_event(event)
+    return jsonify({'message': 'Event deletion request received'}), 200
 
 @app.route('/api/ping', methods=['GET'])
 def ping():
