@@ -1,0 +1,14 @@
+.week-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.day-box {
+    flex: 1;
+    border: 1px solid red;
+    border-radius: 15px;
+    padding: 10px;
+    margin-left: 3px;
+    text-align: center;
+}

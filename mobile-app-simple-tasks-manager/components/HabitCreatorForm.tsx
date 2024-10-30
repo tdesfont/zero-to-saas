@@ -12,7 +12,7 @@ const getRandomId = () => {
 }
 
 
-const TaskSchedulerForm = () => {
+const HabitCreatorForm = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [startTimestamp, setStartTimestamp] = useState(new Date().toISOString());
@@ -37,7 +37,7 @@ const TaskSchedulerForm = () => {
             formData.eventId = getRandomId();
             formData.startTimestamp = new Date(formData.startTimestamp).toISOString();
             formData.endTimestamp = new Date(formData.endTimestamp).toISOString();
-            const response = await axios.post(flaskBackendUrl + '/api/create_event', formData, {
+            const response = await axios.post(flaskBackendUrl + 'api/create_event', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -51,7 +51,19 @@ const TaskSchedulerForm = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>Title:</Text>
+
+            <Text style={styles.label}>Category</Text>
+            <Picker
+                selectedValue={status}
+                onValueChange={(itemValue: string) => setStatus(itemValue)}
+                style={styles.picker}
+            >
+                <Picker.Item label="Sports" value="sports" />
+                <Picker.Item label="Health" value="health" />
+                <Picker.Item label="Work" value="work" />
+            </Picker>
+
+            <Text style={styles.label}>Habit title:</Text>
             <TextInput
                 style={styles.input}
                 value={title}
@@ -59,7 +71,7 @@ const TaskSchedulerForm = () => {
                 placeholder="Enter title"
             />
 
-            <Text style={styles.label}>Description:</Text>
+            <Text style={styles.label}>Description (optional):</Text>
             <TextInput
                 style={styles.input}
                 value={description}
@@ -68,16 +80,18 @@ const TaskSchedulerForm = () => {
                 multiline
             />
 
-            <Text style={styles.label}>Start Timestamp:</Text>
-            <TextInput
-                style={styles.input}
-                value={startTimestamp}
-                defaultValue={new Date().toISOString()}
-                onChangeText={setStartTimestamp}
-                placeholder={new Date().toISOString()}
-            />
+            <Text style={styles.label}>Frequence:</Text>
+            <Picker
+                selectedValue={status}
+                onValueChange={(itemValue: string) => setStatus(itemValue)}
+                style={styles.picker}
+            >
+                <Picker.Item label="Every day" value="daily" />
+                <Picker.Item label="Every week" value="weekly" />
+                <Picker.Item label="Custom" value="custom" />
+            </Picker>
 
-            <Text style={styles.label}>End Timestamp:</Text>
+            <Text style={styles.label}>Start date:</Text>
             <TextInput
                 style={styles.input}
                 value={endTimestamp}
@@ -85,15 +99,34 @@ const TaskSchedulerForm = () => {
                 placeholder={new Date().toISOString()}
             />
 
-            <Text style={styles.label}>Status:</Text>
+            <Text style={styles.label}>End date (optional):</Text>
+            <TextInput
+                style={styles.input}
+                value={endTimestamp}
+                onChangeText={setEndTimestamp}
+                placeholder={new Date().toISOString()}
+            />
+
+            <Text style={styles.label}>Priority:</Text>
             <Picker
                 selectedValue={status}
                 onValueChange={(itemValue: string) => setStatus(itemValue)}
                 style={styles.picker}
             >
-                <Picker.Item label="To be done" value="To be done" />
-                <Picker.Item label="In progress" value="In progress" />
-                <Picker.Item label="Completed" value="Completed" />
+                <Picker.Item label="low" value="low" />
+                <Picker.Item label="medium" value="medium" />
+                <Picker.Item label="high" value="high" />
+            </Picker>
+
+            <Text style={styles.label}>Notification and reminder policy:</Text>
+            <Picker
+                selectedValue={status}
+                onValueChange={(itemValue: string) => setStatus(itemValue)}
+                style={styles.picker}
+            >
+                <Picker.Item label="low" value="low" />
+                <Picker.Item label="medium" value="medium" />
+                <Picker.Item label="high" value="high" />
             </Picker>
 
             <Button title="Submit" onPress={handleSubmit} />
@@ -123,4 +156,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TaskSchedulerForm;
+export default HabitCreatorForm;

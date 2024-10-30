@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
 import TaskSchedulerForm from './TaskSchedulerForm';
+import TaskCreatorForm from './TaskCreatorForm';
 import { flaskBackendUrl } from '@/constants/BackendUrl';
 
-const EventCreator: React.FC = () => {
+const TaskCreator: React.FC = () => {
 
     const getRandomId = () => { 
         /* Generate a random resource id for the event as the id is a primary key and should be unique.
@@ -42,12 +43,13 @@ const EventCreator: React.FC = () => {
     return (
         <View style={styles.container}>
             <View style={styles.tilesContainer}>
+                <TaskCreatorForm />
                 <TouchableOpacity
                     onPress={() => sendEventToServer()}
                 >
-                    <Text style={styles.tileText}>Create new event</Text>
+                    <Text style={styles.tileText}>Create new Task</Text>
                 </TouchableOpacity>
-                <TaskSchedulerForm></TaskSchedulerForm>
+
             </View>
         </View>
     );
@@ -89,4 +91,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EventCreator;
+export default TaskCreator;

@@ -2,7 +2,7 @@ import { Image, StyleSheet } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
-import EventCreator from '@/components/EventCreator';
+import { ThemedText } from '@/components/ThemedText';
 
 export default function HomeScreen() {
   return (
@@ -10,13 +10,13 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
         <Image
-          source={require('@/assets/images/background-cactus.png')}
+          source={require('@/assets/images/serene-background.png')}
           style={styles.reactLogo}
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <EventCreator />
-      </ThemedView>      
+        <ThemedText>Interact with voice</ThemedText>
+      </ThemedView>
      </ParallaxScrollView>
   );
 }

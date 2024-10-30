@@ -6,7 +6,7 @@ import Task from '../components/Task';
 
 const flaskBackendUrl = "http://192.168.1.81:5000";
 
-const Dashboard = () => {
+const Threads = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +15,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(flaskBackendUrl + '/api/events', {
+        const response = await axios.get(flaskBackendUrl + '/api/threads', {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -45,11 +45,11 @@ const Dashboard = () => {
       <span onClick={() => setHideContent(!hideContent)} style={{margin: '2px', padding: '2px'}}>🥸</span>
       <div>
         {
-          data.sort((a, b) => new Date(a.starttimestamp) - new Date(b.starttimestamp)).map((event, index) => <Task key={index} task={event} hideContent={hideContent}></Task>)
+          data.map((thread, index) => <div key={index}>{JSON.stringify(thread)}</div>)
         }
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default Threads;

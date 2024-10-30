@@ -34,10 +34,11 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def delete_task(task):
-    item = task["task"]
+def delete_routinesubtasks(item):
+    item = item["task"]
+    # insert statement
     insert_stmt = sqlalchemy.text(
-        "DELETE FROM tasks WHERE task_id = :task_id"
+        "DELETE FROM routinesubtasks WHERE routine_id = :routine_id"
     )
     with pool.connect() as db_conn:
         # query database

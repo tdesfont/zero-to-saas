@@ -13,14 +13,13 @@ def init_connection_pool() -> sqlalchemy.engine.base.Engine:
     return connect_tcp_socket()
 
 
-def create_task(task):
+def create_thread(item):
     db = init_connection_pool()
     with db.connect() as conn:
         conn.execute(
             sqlalchemy.text(
-                f"INSERT INTO tasks (task_id, title, tag, thread_id, created_at, due_date, priority, reminder_policy) "
-                f"VALUES ('{task['task_id']}', '{task['title']}', '{task['tag']}', '{task['thread_id']}', "
-                f"'{task['created_at']}', '{task['due_date']}', '{task['priority']}', '{task['reminder_policy']}');"
+                f"INSERT INTO threads (thread_id, title, tag) "
+                f"VALUES ('{item['thread_id']}', '{item['title']}', '{item['tag']}');"
             )
         )
         conn.commit()

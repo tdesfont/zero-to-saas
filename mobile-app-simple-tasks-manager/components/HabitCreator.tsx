@@ -4,7 +4,7 @@ import axios from 'axios';
 import TaskSchedulerForm from './TaskSchedulerForm';
 import { flaskBackendUrl } from '@/constants/BackendUrl';
 
-const EventCreator: React.FC = () => {
+const HabitCreator: React.FC = () => {
 
     const getRandomId = () => { 
         /* Generate a random resource id for the event as the id is a primary key and should be unique.
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EventCreator;
+export default HabitCreator;

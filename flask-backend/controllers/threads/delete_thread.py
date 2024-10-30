@@ -34,10 +34,10 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def delete_task(task):
-    item = task["task"]
+def delete_thread(item):
+    item = item["task"]
     insert_stmt = sqlalchemy.text(
-        "DELETE FROM tasks WHERE task_id = :task_id"
+        "DELETE FROM threads WHERE thread_id = :thread_id"
     )
     with pool.connect() as db_conn:
         # query database

@@ -2,6 +2,8 @@ import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
+import { Collapsible } from './Collapsible';
+import { ThemedText } from './ThemedText';
 import { flaskBackendUrl } from '@/constants/BackendUrl';
 
 const getRandomId = () => { 
@@ -12,7 +14,7 @@ const getRandomId = () => {
 }
 
 
-const TaskSchedulerForm = () => {
+const TaskCreatorForm = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [startTimestamp, setStartTimestamp] = useState(new Date().toISOString());
@@ -51,6 +53,7 @@ const TaskSchedulerForm = () => {
 
     return (
         <View style={styles.container}>
+
             <Text style={styles.label}>Title:</Text>
             <TextInput
                 style={styles.input}
@@ -68,23 +71,6 @@ const TaskSchedulerForm = () => {
                 multiline
             />
 
-            <Text style={styles.label}>Start Timestamp:</Text>
-            <TextInput
-                style={styles.input}
-                value={startTimestamp}
-                defaultValue={new Date().toISOString()}
-                onChangeText={setStartTimestamp}
-                placeholder={new Date().toISOString()}
-            />
-
-            <Text style={styles.label}>End Timestamp:</Text>
-            <TextInput
-                style={styles.input}
-                value={endTimestamp}
-                onChangeText={setEndTimestamp}
-                placeholder={new Date().toISOString()}
-            />
-
             <Text style={styles.label}>Status:</Text>
             <Picker
                 selectedValue={status}
@@ -95,6 +81,44 @@ const TaskSchedulerForm = () => {
                 <Picker.Item label="In progress" value="In progress" />
                 <Picker.Item label="Completed" value="Completed" />
             </Picker>
+
+            <Text style={styles.label}>Priority:</Text>
+            <Picker
+                selectedValue={status}
+                onValueChange={(itemValue: string) => setStatus(itemValue)}
+                style={styles.picker}
+            >
+                <Picker.Item label="P0" value="P0" />
+                <Picker.Item label="P1" value="P1" />
+                <Picker.Item label="P2" value="P2" />
+            </Picker>
+
+            <Text style={styles.label}>Expected effort:</Text>
+            <Picker
+                selectedValue={status}
+                onValueChange={(itemValue: string) => setStatus(itemValue)}
+                style={styles.picker}
+            >
+                <Picker.Item label="Low" value="low" />
+                <Picker.Item label="Medium" value="medium" />
+                <Picker.Item label="High" value="high" />
+            </Picker>
+
+            <Text style={styles.label}>Target completion date:</Text>
+            <TextInput
+                style={styles.input}
+                value={endTimestamp}
+                onChangeText={setEndTimestamp}
+                placeholder={new Date().toISOString()}
+            />
+
+            <Text style={styles.label}>Notifications and reminder policy:</Text>
+            <TextInput
+                style={styles.input}
+                value={endTimestamp}
+                onChangeText={setEndTimestamp}
+                placeholder={new Date().toISOString()}
+            />
 
             <Button title="Submit" onPress={handleSubmit} />
         </View>
@@ -123,4 +147,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TaskSchedulerForm;
+export default TaskCreatorForm;

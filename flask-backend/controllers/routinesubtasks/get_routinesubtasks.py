@@ -34,14 +34,18 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def delete_task(task):
-    item = task["task"]
-    insert_stmt = sqlalchemy.text(
-        "DELETE FROM tasks WHERE task_id = :task_id"
-    )
+def retrieve_routinesubtasks():
     with pool.connect() as db_conn:
-        # query database
-        db_conn.execute(insert_stmt, parameters=item)
-        # commit transaction
-        db_conn.commit()
-    return True
+        # Query database
+        result = db_conn.execute(sqlalchemy.text("SELECT * from routinesubtasks")).fetchall()
+        items_list = []
+        for item in result:
+            items_list.append({
+                'routine_id': item[0],
+                'task_id': item[1],
+                'title': item[2],
+                'description': item[3],
+                'frequency': item[4],
+                'priority': item[5]
+            })
+        return items_list

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-
-let API_URL_BACKEND = 'http://192.168.1.112:5000';
-
+const flaskBackendUrl = "http://192.168.1.81:5000";
 
 const Task = (task) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -11,7 +9,7 @@ const Task = (task) => {
   
   const deleteEvent = async (event) => {
     try {
-      const response = await axios.post(API_URL_BACKEND + '/api/delete_event', event, {
+      const response = await axios.post(flaskBackendUrl + '/api/delete_event', event, {
         headers: {
           'Content-Type': 'application/json',
         }
@@ -23,7 +21,6 @@ const Task = (task) => {
     }
   };
 
-  
   // TODO: Remove below
   const taskContent = task.task;
   return (

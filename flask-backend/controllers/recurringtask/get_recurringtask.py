@@ -34,18 +34,15 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def retrieve_routinesubtasks():
+def retrieve_recurringtask():
     with pool.connect() as db_conn:
         # Query database
-        result = db_conn.execute(sqlalchemy.text("SELECT * from routinesubtasks")).fetchall()
+        result = db_conn.execute(sqlalchemy.text("SELECT * from recurringtask")).fetchall()
+        columns = [
+            'recurring_task_id', 'thread_id', 'title', 'description', 'frequency', 'start_date',
+            'target_date', 'priority', 'muted', 'archived'
+        ]
         items_list = []
         for item in result:
-            items_list.append({
-                'routine_id': item[0],
-                'task_id': item[1],
-                'title': item[2],
-                'description': item[3],
-                'frequency': item[4],
-                'priority': item[5]
-            })
+            items_list.append({columns[i]: item[i] for i in range(len(item))})
         return items_list

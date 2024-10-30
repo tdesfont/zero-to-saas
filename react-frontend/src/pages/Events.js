@@ -6,7 +6,7 @@ import Task from '../components/Task';
 
 const flaskBackendUrl = "http://192.168.1.81:5000";
 
-const Dashboard = () => {
+const Events = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -52,4 +52,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Events;

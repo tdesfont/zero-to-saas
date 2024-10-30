@@ -34,14 +34,15 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def delete_task(task):
-    item = task["task"]
+def create_routinesubtasks(item):
+    # insert statement
     insert_stmt = sqlalchemy.text(
-        "DELETE FROM tasks WHERE task_id = :task_id"
+        "INSERT INTO routinesubtasks (routine_id, task_id, title, description, frequency, priority) VALUES (:routine_id, :task_id, :title, :description, :frequency, :priority)",
     )
     with pool.connect() as db_conn:
         # query database
         db_conn.execute(insert_stmt, parameters=item)
-        # commit transaction
+
+        # commit transaction (SQLAlchemy v2.X.X is commit as you go)
         db_conn.commit()
     return True

@@ -19,6 +19,12 @@ const Layout = () => {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/dashboard">Dashboard</Link></li>
             <li><Link to="/timetracking">Timetracking</Link></li>
+            <li><Link to="/events">Events</Link></li>
+            <li><Link to="/tasks">Tasks</Link></li>
+            <li><Link to="/routinesubtasks">RoutinesSubTasks</Link></li>
+            <li><Link to="/recurringtask">Recurring Tasks</Link></li>
+            <li><Link to="/today">Today</Link></li>
+            <li><Link to="/threads">Threads</Link></li>
           </ul>
         </div>
       </div>

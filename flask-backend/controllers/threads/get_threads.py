@@ -34,14 +34,15 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def delete_task(task):
-    item = task["task"]
-    insert_stmt = sqlalchemy.text(
-        "DELETE FROM tasks WHERE task_id = :task_id"
-    )
+def retrieve_threads():
     with pool.connect() as db_conn:
         # query database
-        db_conn.execute(insert_stmt, parameters=item)
-        # commit transaction
-        db_conn.commit()
-    return True
+        result = db_conn.execute(sqlalchemy.text("SELECT * from threads")).fetchall()
+        items_list = []
+        for item in result:
+            items_list.append({
+                'thread_id': item[0],
+                'title': item[1],
+                'tag': item[2]
+            })
+        return items_list

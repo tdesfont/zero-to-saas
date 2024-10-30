@@ -15,11 +15,38 @@ export default function TabLayout() {
         headerShown: false,
       }}>
       <Tabs.Screen
+        name="tasks"
+        options={{
+          title: 'Tasks',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'checkbox' : 'checkbox-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="habits"
+        options={{
+          title: 'Habits',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'checkbox' : 'checkbox-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'Events',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <TabBarIcon name={focused ? 'calendar' : 'calendar-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="interact_w_voice"
+        options={{
+          title: 'Voice',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'mic' : 'mic-outline'} color={color} />
           ),
         }}
       />
