@@ -34,15 +34,18 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def create_event(event):
-    # insert statement
-    insert_stmt = sqlalchemy.text(
-        "INSERT INTO events (eventId, title, description, status, startTimestamp, endTimestamp) VALUES (:eventId, :title, :description, :status, :startTimestamp, :endTimestamp)",
-    )
+def retrieve_routinesubtasks():
     with pool.connect() as db_conn:
-        # query database
-        db_conn.execute(insert_stmt, parameters=event)
-
-        # commit transaction (SQLAlchemy v2.X.X is commit as you go)
-        db_conn.commit()
-    return True
+        # Query database
+        result = db_conn.execute(sqlalchemy.text("SELECT * from routinesubtasks")).fetchall()
+        items_list = []
+        for item in result:
+            items_list.append({
+                'routine_id': item[0],
+                'task_id': item[1],
+                'title': item[2],
+                'description': item[3],
+                'frequency': item[4],
+                'priority': item[5]
+            })
+        return items_list
