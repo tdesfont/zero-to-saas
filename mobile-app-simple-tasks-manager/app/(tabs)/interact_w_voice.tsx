@@ -3,6 +3,7 @@ import { Image, StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
+import AudioRecorder from '@/components/audio/AudioRecorder';
 
 export default function HomeScreen() {
   return (
@@ -16,6 +17,9 @@ export default function HomeScreen() {
       }>
       <ThemedView style={styles.titleContainer}>
         <ThemedText>Interact with voice</ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.titleContainer}>
+        <AudioRecorder></AudioRecorder>
       </ThemedView>
      </ParallaxScrollView>
   );

@@ -2,23 +2,25 @@
 .layout {
     display: flex;
     height: 100vh;
+    background-color: #f4f4f4;
 }
 
 .leftBar {
     display: flex;
     flex-direction: column;
+    flex-grow: initial;
 }
 
 .header {
     width: 200px;
-    background-color: white;
-    padding: 20px;
+    background-color: #f4f4f4;
+    padding: 10px;
     flex: 1;
 }
 
 .menu {
     width: 200px;
-    background-color: white;
+    background-color: #f4f4f4;
     padding: 20px;
     flex: 30;
 }
@@ -41,5 +43,6 @@
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-    background-color: #f4f4f4;
+    background-color: white;
+    border-radius: 10px;
 }

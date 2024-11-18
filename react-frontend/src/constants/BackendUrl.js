@@ -1,0 +1,1 @@
+export const flaskBackendUrl = "http://192.168.43.62:5000";

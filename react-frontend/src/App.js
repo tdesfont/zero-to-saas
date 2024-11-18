@@ -13,13 +13,15 @@ import RoutinesSubTasks from './pages/RoutinesSubTasks';
 import Threads from './pages/Threads';
 import RecurringTask from './pages/RecurringTask';
 import Today from './pages/Today';
+import Reminders from './pages/Reminders';
+import TimeOut from './pages/TimeOut';
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Today />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="dashboard" element={<Dashboard />} />
@@ -28,8 +30,10 @@ const App = () => {
           <Route path="tasks" element={<Tasks />} />
           <Route path="routinesubtasks" element={<RoutinesSubTasks />} />
           <Route path="recurringtask" element={<RecurringTask />} />
-          <Route path="today" element={<Today></Today>} />
+          <Route path="reminders" element={<Reminders />} />
+          <Route path="today" element={<Today />} />
           <Route path="threads" element={<Threads />} />
+          <Route path="time-out" element={<TimeOut />} />
         </Route>
       </Routes>
     </Router>

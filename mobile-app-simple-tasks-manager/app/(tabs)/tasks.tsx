@@ -29,11 +29,11 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 3,
   },
   stepContainer: {
     gap: 8,
-    marginBottom: 8,
+    marginBottom: 4,
   },
   reactLogo: {
     height: '100%',

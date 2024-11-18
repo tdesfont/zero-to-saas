@@ -3,8 +3,7 @@ import axios from 'axios';
 import LoadingSpinner from '../components/LoadingSpinner';
 import './RecurringTask.css';
 
-const flaskBackendUrl = "http://192.168.1.81:5000";
-
+import { flaskBackendUrl } from '../constants/BackendUrl';
 
 const getLast7Days = () => {
   const days = [];

@@ -34,19 +34,18 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def retrieve_tasks():
+def retrieve_reminders():
     with pool.connect() as db_conn:
         # query database
-        result = db_conn.execute(sqlalchemy.text("SELECT * from tasks")).fetchall()
+        result = db_conn.execute(sqlalchemy.text("SELECT * from reminders")).fetchall()
+
         items_list = []
         for item in result:
             items_list.append({
-                'task_id': item[0],
+                'reminderid': item[0],
                 'title': item[1],
-                'thread_id': item[2],
-                'created_at': item[3],
-                'due_date': item[4],
-                'priority': item[5],
-                'completed': item[6]
+                'description': item[2],
+                'status': item[3],
+                'timestamp': item[4]
             })
         return items_list

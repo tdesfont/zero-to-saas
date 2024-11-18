@@ -59,7 +59,7 @@ const TaskCreatorForm = () => {
                 style={styles.input}
                 value={title}
                 onChangeText={setTitle}
-                placeholder="Enter title"
+                placeholder="Title for your task"
             />
 
             <Text style={styles.label}>Description:</Text>
@@ -127,18 +127,19 @@ const TaskCreatorForm = () => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
+        padding: 1,
     },
     label: {
         fontSize: 16,
-        marginTop: 10,
+        marginTop: 5,
     },
     input: {
-        height: 40,
+        height: 38,
         borderColor: 'gray',
         borderWidth: 1,
-        marginTop: 5,
-        paddingHorizontal: 10,
+        borderRadius: 10,
+        marginTop: 1,
+        paddingHorizontal: 4,
     },
     picker: {
         height: 50,

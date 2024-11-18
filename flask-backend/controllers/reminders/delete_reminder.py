@@ -34,19 +34,15 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def retrieve_tasks():
+def delete_reminder(item):
+    item = item["task"]
+    # insert statement
+    insert_stmt = sqlalchemy.text(
+        "DELETE FROM reminder WHERE reminderId = :reminderid"
+    )
     with pool.connect() as db_conn:
         # query database
-        result = db_conn.execute(sqlalchemy.text("SELECT * from tasks")).fetchall()
-        items_list = []
-        for item in result:
-            items_list.append({
-                'task_id': item[0],
-                'title': item[1],
-                'thread_id': item[2],
-                'created_at': item[3],
-                'due_date': item[4],
-                'priority': item[5],
-                'completed': item[6]
-            })
-        return items_list
+        db_conn.execute(insert_stmt, parameters=item)
+        # commit transaction
+        db_conn.commit()
+    return True

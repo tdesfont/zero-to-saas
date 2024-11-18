@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-const flaskBackendUrl = "http://192.168.1.81:5000";
+import { flaskBackendUrl } from '../constants/BackendUrl';
 
 const Task = (task) => {
   const [isExpanded, setIsExpanded] = useState(false);

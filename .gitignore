@@ -1,3 +1,9 @@
 venv
 .idea
 sql-data-model
+flask-backend/converted_audio.wav
+flask-backend/my_audio_file.wav
+flask-backend/rag_embeddings.csv
+rag-llm/.env
+rag-llm/.ipynb_checkpoints/
+rag-llm/rag_embeddings.csv

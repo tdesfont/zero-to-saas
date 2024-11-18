@@ -34,19 +34,15 @@ pool = sqlalchemy.create_engine(
 )
 
 
-def retrieve_tasks():
+def create_reminder(item):
+    # insert statement
+    insert_stmt = sqlalchemy.text(
+        "INSERT INTO reminders (reminderid, title, description, status, timestamp) VALUES (:reminderid, :title, :description, :status, :timestamp)",
+    )
     with pool.connect() as db_conn:
         # query database
-        result = db_conn.execute(sqlalchemy.text("SELECT * from tasks")).fetchall()
-        items_list = []
-        for item in result:
-            items_list.append({
-                'task_id': item[0],
-                'title': item[1],
-                'thread_id': item[2],
-                'created_at': item[3],
-                'due_date': item[4],
-                'priority': item[5],
-                'completed': item[6]
-            })
-        return items_list
+        db_conn.execute(insert_stmt, parameters=item)
+
+        # commit transaction (SQLAlchemy v2.X.X is commit as you go)
+        db_conn.commit()
+    return True

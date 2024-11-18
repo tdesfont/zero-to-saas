@@ -2,11 +2,28 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
-const flaskBackendUrl = "http://192.168.1.81:5000";
+import { flaskBackendUrl } from '../constants/BackendUrl';
+
+const PriorityWidget = (priority) => {
+  let label = "Low Priority";
+  let backgroundColor = "#61ff8b";
+  if (priority == 2) {
+    label = "Medium Priority";
+    backgroundColor = "#c891ff";
+  } else if (priority == 3) {
+    label = "High Priority";
+    backgroundColor = "#ff85d0";
+  }
+  return (
+    <span style={{backgroundColor: backgroundColor, borderRadius: '5px', padding: '3px', fontSize: 13 }}>
+      {label}
+    </span>
+  )
+}
 
 const Task2 = (task) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   const deleteTask = async (task) => {
     try {
       const response = await axios.post(flaskBackendUrl + '/api/delete_task', task, {
@@ -15,34 +32,79 @@ const Task2 = (task) => {
         }
       });
     } catch (error) {
-        console.log(error);
+      console.log(error);
     } finally {
       console.log("Done");
     }
   };
 
   const taskContent = task.task;
+  console.log("Task content", taskContent);
+
   return (
-    <div style={{borderRadius: '6px', margin: '4px', padding: '5px', border: '1px solid'}} onClick={() => setIsExpanded(!isExpanded)}>
-          <span style={{backgroundColor: '#80d4ff', borderRadius: '2%', margin: '2px', padding: '2px'}}>{taskContent.due_date}</span>
-          <span style={{fontWeight: 'bold'}}>➡️ {taskContent.title}</span>
+    <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'white', borderRadius: '6px', margin: '2px', padding: '5px', border: '1px solid' }} onClick={() => setIsExpanded(!isExpanded)}>
+
+      <span style={{ flex: 1, display: 'flex', flexDirection: 'row', margin: '1px' }}>
+
+        <span style={{ flex: 0.2, flexDirection: 'column', display: 'flex' }}>
+          <input
+            type="checkbox"
+            checked={taskContent.completed}
+          />
+        </span>
+
+        <span style={{ flex: 1, flexDirection: 'column', display: 'flex' }}>
+          <span style={{ flex: 1, fontSize: 14, color: 'grey' }}>
+            Due date
+          </span>
+          <span style={{ flex: 1 }}>
+            {taskContent.due_date.slice(0, 11)}
+          </span>
+        </span>
+
+        <span style={{ flex: 1, flexDirection: 'column', display: 'flex' }}>
+          <span style={{ flex: 1, fontSize: 14, color: 'grey' }}>
+            Priority
+          </span>
+          <span style={{ flex: 1 }}>
+              <PriorityWidget priority={taskContent.priority}></PriorityWidget>
+          </span>
+        </span>
+
+        <span style={{ flex: 3, flexDirection: 'column', display: 'flex' }}>
+          <span style={{ flex: 1, fontSize: 14, color: 'grey' }}>
+            Title
+          </span>
+          <span style={{ flex: 1 }}>
+            {taskContent.title}
+          </span>
+        </span>
+
+        <span style={{ flex: 1, flexDirection: 'column', display: 'flex' }}>
+          <span style={{ flex: 1, fontSize: 14, color: 'grey' }}>
+            Thread id:
+          </span>
+          <span style={{ flex: 1 }}>
+            {taskContent.thread_id.slice(10,)}
+          </span>
+        </span>
+
+        <span style={{ flex: 1, flexDirection: 'column' }}>
+          <button>Edit</button>
+        </span>
+
+      </span>
+
+      {
+        (isExpanded) &&
+        <span style={{ flex: 1, display: 'flex', flexDirection: 'row', margin: '5px' }}>
           <div>
-          ⏲️ {moment(taskContent.due_date).fromNow()}
+            <span onClick={() => deleteTask(task)} style={{ border: '1px solid red', margin: '2px', padding: '2px', borderRadius: '10%' }}>🗑️</span>
+            <span> {taskContent.description} </span>
           </div>
-          {
-            (isExpanded) && 
-            <span>
-              <span onClick={() => deleteTask(task)} style={{border: '1px solid red', margin: '2px', padding: '2px', borderRadius: '10%'}}>🗑️</span>
-              <div>
-                <span> {taskContent.description} </span>
-                ➡️ {taskContent.tag}
-                ➡️ {taskContent.thread_id}
-                ➡️ {taskContent.priority}
-              </div>
-              <code style={{backgroundColor: 'pink'}}>code /Users/tbd/Documents/threads/2024-10-10-winter-2024-job-search; </code>
-            </span>
-          } 
-     </div>
+        </span>
+      }
+    </div>
   );
 };
 

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LoadingSpinner from '../components/LoadingSpinner';
-import Task2 from '../components/Task2';
 
 import { flaskBackendUrl } from '../constants/BackendUrl';
-import TaskChart from '../components/TasksChart';
-import PriorityPieChart from '../components/PriorityPieChart';
+console.log("flaskBackendUrl", flaskBackendUrl);
 
-const Tasks = () => {
+const Reminders = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +14,7 @@ const Tasks = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(flaskBackendUrl + '/api/tasks', {
+        const response = await axios.get(flaskBackendUrl + '/api/get_reminders', {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -42,18 +40,15 @@ const Tasks = () => {
 
   return (
     <div>
-      {/* <a href="https://dribbble.com/tags/project-management">Dribble - Project management</a> */}
-      <div>
-        <TaskChart data={data}/>
-      </div>
+      <span onClick={() => console.log('Button clicked')} style={{margin: '2px', padding: '2px'}}>⚙️</span>
+      <span onClick={() => setHideContent(!hideContent)} style={{margin: '2px', padding: '2px'}}>🥸</span>
       <div>
         {
-          data.sort((a, b) => new Date(a.due_date) - new Date(b.due_date)).map((task, index) => <Task2 key={index} task={task}></Task2>)
+          data.map((task, index) => <div key={index}>{JSON.stringify(task)}</div>)
         }
       </div>
-
     </div>
   );
 };
 
-export default Tasks;
+export default Reminders;
